@@ -1,4 +1,50 @@
-import pandas as pd
+
+import numpy as np
+
+def max_matching(matriz_inc):
+    n, m = matriz_inc.shape
+    match_y = [-1] * m  # Arreglo para las coincidencias de vértices en Y
+
+    # DFS para encontrar un camino de aumentación
+    def dfs(x, visitado):
+        for y in range(m):
+            # Si hay arista y el vértice y no ha sido visitado
+            if matriz_inc[x][y] == 1 and not visitado[y]:
+                visitado[y] = True
+                # Si y no está emparejado o podemos reasignarlo
+                if match_y[y] == -1 or dfs(match_y[y], visitado):
+                    match_y[y] = x
+                    return True
+        return False
+
+    # Intentamos emparejar cada vértice en X
+    max_match = 0
+    for x in range(n):
+        visitado = [False] * m
+        if dfs(x, visitado):
+            max_match += 1
+
+    # Construimos el resultado del emparejamiento
+    emparejamiento = [(match_y[y], y) for y in range(m) if match_y[y] != -1]
+    return emparejamiento, max_match
+
+# Ejemplo de uso con una matriz de incidencia (grafo bipartito sin pesos)
+matriz_inc = np.array([
+    [0, 1, 1,1],
+    [0, 1, 1,0],
+    [1, 1, 1,0],
+    [0, 0, 0,1],
+])
+
+emparejamiento, max_match = max_matching(matriz_inc)
+emparejamiento=np.array(emparejamiento)
+emparejamiento+=1
+print("Emparejamiento maximo:\n", emparejamiento)
+print("Numero maximo de emparejamientos:", max_match)
+
+
+
+"""import pandas as pd
 import numpy as np
 
 def metodo_hungaro(data):
@@ -93,3 +139,4 @@ data2 = pd.DataFrame({
 # Guardamos una copia del original para calcular costos
 original_data = data2.copy()
 metodo_hungaro(data2)
+"""
