@@ -65,7 +65,8 @@
       <workItem from="1730126062686" duration="327000" />
       <workItem from="1730126521399" duration="2024000" />
       <workItem from="1730159889760" duration="3909000" />
-      <workItem from="1730321524516" duration="1910000" />
+      <workItem from="1730321524516" duration="2691000" />
+      <workItem from="1730390677523" duration="1580000" />
     </task>
     <servers />
   </component>
@@ -73,6 +74,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MetodoHungaro$main.coverage" NAME="main Coverage Results" MODIFIED="1730324077804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MetodoHungaro$main.coverage" NAME="main Coverage Results" MODIFIED="1730392238088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

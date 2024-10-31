@@ -1,39 +1,42 @@
 import numpy as np
 
-
 def max_matching(matriz_inc):
     """
-    Calcula el emparejamiento maximo en un grafo bipartito dado por una matriz de incidencia.
+    Calcula el emparejamiento máximo en un grafo bipartito dado por una matriz de incidencia.
 
-    Parametros:
-    matriz_inc (numpy.ndarray): Matriz de incidencia donde los elementos son 1 si existe arista entre los vertices y 0 si no.
+    Parámetros:
+    matriz_inc (numpy.ndarray): Matriz de incidencia donde los elementos son 1 si existe arista entre los vértices y 0 si no.
 
     Retorna:
-    tuple: Una lista de pares (x, y) donde x es un vertice del conjunto X y y es un vertice del conjunto Y,
-           y el numero total de emparejamientos maximos encontrados.
+    tuple: Una lista de pares (x, y) donde x es un vértice del conjunto X y y es un vértice del conjunto Y,
+           y el número total de emparejamientos máximos encontrados.
     """
     n, m = matriz_inc.shape
-    match_y = [-1] * m  # Arreglo para almacenar las coincidencias de vertices en Y
+    match_y = [-1] * m  # Arreglo para almacenar las coincidencias de vértices en Y
 
     def dfs(x, visitado):
         """
-        Busca un camino de aumentacion usando busqueda en profundidad (DFS) desde el vertice x.
+        Busca un camino de aumentación usando búsqueda en profundidad (DFS) desde el vértice x.
 
-        Parametros:
-        x (int): El vertice actual del conjunto X.
-        visitado (list): Lista que indica si un vertice en Y ha sido visitado durante esta DFS.
+        Parámetros:
+        x (int): El vértice actual del conjunto X.
+        visitado (list): Lista que indica si un vértice en Y ha sido visitado durante esta DFS.
 
         Retorna:
-        bool: True si se encontro un camino de aumentacion, False de lo contrario.
+        bool: True si se encontró un camino de aumentación, False de lo contrario.
         """
         for y in range(m):
-            # Si existe una arista y el vertice y no ha sido visitado
+            # Si existe una arista y el vértice y no ha sido visitado
             if matriz_inc[x][y] == 1 and not visitado[y]:
                 visitado[y] = True
-                # Si y no esta emparejado o podemos reasignarlo
+                print(f"Intentando expandir camino desde X[{x+1}] hacia Y[{y+1}]")
+                # Si y no está emparejado o podemos reasignarlo
                 if match_y[y] == -1 or dfs(match_y[y], visitado):
+                    print(f"Emparejando X[{x+1}] con Y[{y+1}]")
                     match_y[y] = x
                     return True
+                else:
+                    print(f"Y[{y+1}] ya está emparejado y no se puede reasignar")
         return False
 
     max_match = 0
@@ -45,20 +48,20 @@ def max_matching(matriz_inc):
     emparejamiento = [(match_y[y], y) for y in range(m) if match_y[y] != -1]
     return emparejamiento, max_match
 
-
 def matching(matriz_inc):
     """
-    Imprime el emparejamiento maximo y el numero maximo de emparejamientos
+    Imprime el emparejamiento máximo y el número máximo de emparejamientos
     para la matriz de incidencia dada.
 
-    Parametros:
-    matriz_inc (numpy.ndarray): Matriz de incidencia para la cual se calcula el emparejamiento maximo.
+    Parámetros:
+    matriz_inc (numpy.ndarray): Matriz de incidencia para la cual se calcula el emparejamiento máximo.
     """
+    print(matriz_inc)
     emparejamiento, max_match = max_matching(matriz_inc)
     emparejamiento = np.array(emparejamiento) + 1  # Convertir a 1-indexado
-    print("Emparejamiento maximo:\n", emparejamiento)
-    print("Numero maximo de emparejamientos:", max_match)
-
+    print("Emparejamiento máximo:\n", emparejamiento)
+    print("Número máximo de emparejamientos:", max_match)
+    print("\n\n")
 
 # Ejemplo de uso con matrices de incidencia diferentes
 matriz_inc1 = np.array([
@@ -76,15 +79,16 @@ matriz_inc2 = np.array([
 ])
 matching(matriz_inc2)
 
-
 matriz_inc3 = np.array([
-    [0, 1, 1,0,0],
-    [0, 0, 1,1,1],
-    [1, 1, 1,0,0],
-    [0, 1, 1,0,0],
-    [1, 0, 0,1,0],
+    [0, 1, 1, 0, 0],
+    [0, 0, 1, 1, 1],
+    [1, 1, 1, 0, 0],
+    [0, 1, 1, 0, 0],
+    [1, 0, 0, 1, 0],
 ])
 matching(matriz_inc3)
+
+
 
 """import pandas as pd
 import numpy as np
